@@ -18,34 +18,31 @@ const segments = [
 ];
 
 export const ProjectRequestList = props => (
-    <List {...props}>
+    <List title="Facilities Project Requests" {...props}>
         <Datagrid rowClick="edit">
             <EditButton />
             <TextField source="id" />
+            <TextField source="projectName" />
+            <TextField source="netId" label="NetId" />
             <TextField source="firstName" />
             <TextField source="lastName" />
-            <TextField source="phone" />
-            <TextField source="netId" />
-            <TextField source="managerFirstName" />
-            <TextField source="managerLastName" />
-            <TextField source="managerNetId" />
-            <TextField source="projectLocationCampus" />
-            <TextField source="projectLocationBuilding" />
+            <TextField source="projectLocationBuilding" label="Location" />
+            <TextField source="userName" label="Created By"/>
+            {/* <TextField source="projectLocationCampus" />
+            <TextField source="projectPriority" />
+            <NumberField source="fiscalYearStart" />
             <TextField source="projectLocationFloor" />
             <TextField source="projectLocationRoom" />
-            <TextField source="projectName" />
             <TextField source="projectDetails" />
             <TextField source="estimatedBudget" />
             <DateField source="dateRequiredBy" />
             <TextField source="sourceOfFunding" />
             <TextField source="projectType" />
-            <TextField source="projectPriority" />
             <TextField source="reason" />
             <TextField source="executingDepartment" />
-            <NumberField source="fiscalYearStart" />
             <DateField source="estimatedStartDate" />
             <DateField source="estimatedEndDate" />
-            <TextField source="attachment" />
+            <TextField source="attachment" /> */}
 
         </Datagrid>
     </List>
