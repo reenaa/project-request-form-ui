@@ -38,7 +38,7 @@ const httpClient = (url, options = {}) => {
     return fetchUtils.fetchJson(url, options);
 };
 
-const dataProvider = jsonServerProvider('http://localhost:8080', httpClient);
+const dataProvider = jsonServerProvider('http://fac130l.princeton.edu:8080', httpClient);
 // const dataProvider = simpleRestProvider('http://localhost:3000', httpClient);
 const App = () => (
       <Admin theme={theme} authProvider={authProvider} dataProvider={dataProvider} loginPage={MyLoginPage}>
