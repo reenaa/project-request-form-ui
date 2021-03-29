@@ -5,7 +5,7 @@ import { List, Datagrid, TextField, DateField, NumberField, EmailField, UrlField
     
     SaveButton,
     DeleteButton,
-    NullableBooleanInput, } from 'react-admin';
+    NullableBooleanInput, ReferenceInput,FormDataConsumer } from 'react-admin';
 
 import { Typography, Box, Toolbar,Divider  } from '@material-ui/core';
 const segments = [
@@ -385,10 +385,34 @@ const ProjectForm = props => (
                             <Box mt="1em" />
                             <Typography variant="h6" gutterBottom>Project Location</Typography>
 
-                            <TextInput resource="project-requests" source="projectLocationCampus" label="Campus" margin="dense" variant="outlined"  fullWidth/>
-                            <TextInput resource="project-requests" source="projectLocationBuilding" label="Building" margin="dense" variant="outlined"  fullWidth/>
-                            <TextInput resource="project-requests" source="projectLocationFloor" label="Floor" margin="dense" variant="outlined"  fullWidth/>
-                            <TextInput resource="project-requests" source="projectLocationRoom" label="Room" margin="dense" variant="outlined"  fullWidth/>
+                            <ReferenceInput label="Campus" source="projectLocationCampus" reference="sites">
+                                <SelectInput  optionText="name" optionValue="id" margin="dense" variant="outlined"  fullWidth/>
+                            </ReferenceInput>
+
+                            <FormDataConsumer>
+                            {({ formData, ...rest }) =>  formData.projectLocationCampus &&(
+
+                            <ReferenceInput label="Building" source="projectLocationBuilding" reference="buildings" filter={{site: formData.projectLocationCampus}} {...rest}>
+                                <SelectInput  source="projectLocationBuilding" optionText="name" optionValue="id" margin="dense" variant="outlined"  fullWidth/>
+                            </ReferenceInput>
+                            )}
+                            </FormDataConsumer>
+
+                            <FormDataConsumer>
+                            {({ formData, ...rest }) =>  formData.projectLocationCampus && formData.projectLocationBuilding && (
+                            <ReferenceInput label="Floor" source="projectLocationFloor" reference="floors" filter={{site: formData.projectLocationCampus , buildingCode: formData.projectLocationBuilding}} {...rest}>
+                                <SelectInput source="projectLocationFloor" optionText="name" optionValue="id" margin="dense" variant="outlined"  fullWidth/>
+                            </ReferenceInput>
+                            )}
+                            </FormDataConsumer>
+
+                            <FormDataConsumer>
+                            {({ formData, ...rest }) => formData.projectLocationCampus && formData.projectLocationBuilding && formData.projectLocationFloor && (
+                            <ReferenceInput label="Room" source="projectLocationRoom" reference="rooms" filter={{site: formData.projectLocationCampus , buildingCode: formData.projectLocationBuilding, floorCode: formData.projectLocationFloor}} {...rest}>
+                                <SelectInput source="projectLocationRoom" optionText="id" optionValue="id" margin="dense" variant="outlined"  fullWidth/>
+                            </ReferenceInput>
+                            )}
+                            </FormDataConsumer>
                         
 
                             <Box mt="1em" />
