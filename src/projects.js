@@ -384,7 +384,6 @@ const ProjectForm = props => (
                             <Divider />
                             <Box mt="1em" />
                             <Typography variant="h6" gutterBottom>Project Location</Typography>
-
                             <ReferenceInput label="Campus" source="projectLocationCampus" reference="sites">
                                 <SelectInput  optionText="name" optionValue="id" margin="dense" variant="outlined"  fullWidth/>
                             </ReferenceInput>
@@ -413,6 +412,7 @@ const ProjectForm = props => (
                             </ReferenceInput>
                             )}
                             </FormDataConsumer>
+                            
                         
 
                             <Box mt="1em" />
@@ -435,8 +435,8 @@ const ProjectForm = props => (
                                     {/* <TextInput source="managerFirstName" resource="project-requests" label="Manager First Name" margin="dense" variant="outlined" fullWidth /> */}
 
                                     <SelectInput source="sourceOfFunding" resource="project-requests" label="Source Of Funding" margin="dense" variant="outlined" fullWidth choices={[
+                { id: 'Central Funding (Capital Request)', name: 'Central Funding (Capital Request)' },
                 { id: 'Departmental', name: 'Departmental' },
-                { id: 'Central Funding (Capital Request)', name: 'Central Funding Capital Request)' },
                 { id: 'Major Maintenance', name: 'Major Maintenance' },
                 { id: 'Operating', name: 'Operating' },
             ]} />
@@ -449,7 +449,6 @@ const ProjectForm = props => (
                 { id: 'Furnishings/Interior Finishes', name: 'Furnishings/Interior Finishes' },
                 { id: 'Major Maintenance Request for Immediate Consideration', name: 'Major Maintenance Request for Immediate Consideration' },
                 { id: 'Major Maintenance Request for inclusion in Annual Program', name: 'Major Maintenance Request for inclusion in Annual Program' },
-                { id: 'Feasibility Study', name: 'Feasibility Study' },
                 { id: 'New Building', name: 'New Building' },
                 { id: 'Renovation', name: 'Renovation' },
             ]} />
@@ -465,17 +464,17 @@ const ProjectForm = props => (
                                 <Box flex={1} mr="0.5em">
                                     {/* <TextInput source="managerFirstName" resource="project-requests" label="Manager First Name" margin="dense" variant="outlined" fullWidth /> */}
                                     <SelectInput source="projectPriority" resource="project-requests" label="Project Priority" margin="dense" variant="outlined" fullWidth choices={[
-                { id: 'End of useful life', name: 'End of useful life' },
-                { id: 'Current condition justifies repair/replacement', name: 'Current condition justifies repair/replacement' },
-                { id: 'Regulatory and code requirements', name: 'Regulatory and code requirements' },
-                { id: 'An opportunity project', name: 'An opportunity project' },
                 { id: 'An emergency condition exist', name: 'An emergency condition exist' },
-                { id: 'Departmental Request', name: 'Departmental Request' },
-                { id: 'Provost Request', name: 'Provost Request' },
+                { id: 'An opportunity project', name: 'An opportunity project' },
                 { id: 'Capital Plan Priority', name: 'Capital Plan Priority' },
-                { id: 'New Faculty/Staff', name: 'New Faculty/Staff' },
-                { id: 'Health and Safety', name: 'Health and Safety' },
                 { id: 'Consider for MM – FY- Annual', name: 'Consider for MM – FY- Annual' },
+                { id: 'Current condition justifies repair/replacement', name: 'Current condition justifies repair/replacement' },
+                { id: 'Departmental Request', name: 'Departmental Request' },
+                { id: 'End of useful life', name: 'End of useful life' },
+                { id: 'Health and Safety', name: 'Health and Safety' },
+                { id: 'New Faculty/Staff', name: 'New Faculty/Staff' },
+                { id: 'Provost Request', name: 'Provost Request' },
+                { id: 'Regulatory and code requirements', name: 'Regulatory and code requirements' },
             ]} />
                                 </Box>
                                 <Box flex={1} ml="0.5em">
@@ -512,7 +511,7 @@ const ProjectForm = props => (
                 { id: 'Engineering', name: 'Engineering' },
                 { id: 'Facilities Administrative Services', name: 'Facilities Administrative Services' },
                 { id: 'Facilities Operations', name: 'Facilities Operations' },
-                { id: 'iFacilities Group for the Facilities Procurement Office', name: 'iFacilities Group for the Facilities Procurement Office' },
+                { id: 'Facilities Group for the Facilities Procurement Office', name: 'Facilities Group for the Facilities Procurement Office' },
                 { id: 'Grounds and Building Maintenance', name: 'Grounds and Building Maintenance' },
                 { id: 'Housing', name: 'Housing' },
 
@@ -535,10 +534,10 @@ const ProjectForm = props => (
                             </Box>
                             <Box display="flex">
                                 <Box flex={1} mr="0.5em">
-                                    <DateInput source="estimatedStartDate" resource="project-requests" label="Estimated Start Datet" margin="dense" variant="outlined" fullWidth/>
+                                    <DateInput source="estimatedStartDate" resource="project-requests" label="Estimated Start Date" margin="dense" variant="outlined" fullWidth/>
                                 </Box>
                                 <Box flex={1} ml="0.5em">
-                                    <DateInput source="estimatedEndDate" resource="project-requests" label="Estimated End Datet" margin="dense" variant="outlined" fullWidth/>
+                                    <DateInput source="estimatedEndDate" resource="project-requests" label="Estimated End Date" margin="dense" variant="outlined" fullWidth/>
                                 </Box>
                             </Box>
 
