@@ -5,9 +5,18 @@ import { List, Datagrid, TextField, DateField, NumberField, EmailField, UrlField
     
     SaveButton,
     DeleteButton,
-    NullableBooleanInput, ReferenceInput,FormDataConsumer } from 'react-admin';
+    NullableBooleanInput, ReferenceInput,FormDataConsumer, required } from 'react-admin';
 
 import { Typography, Box, Toolbar,Divider  } from '@material-ui/core';
+import numeral from 'numeral';
+
+const formatBudget = value =>
+  value === undefined
+    ? '' // make controlled
+    : numeral(value).format('$0,0')
+
+const optionRenderer = choice => `${choice.id} ${choice.name}`;    
+
 const segments = [
     { id: 'compulsive', name: 'Compulsive' },
     { id: 'collector', name: 'Collector' },
@@ -351,18 +360,18 @@ const ProjectForm = props => (
 
                             <Box display="flex">
                                 <Box flex={1} mr="0.5em">
-                                    <TextInput source="firstName"  label="First Name" resource="project-requests"  margin="dense" variant="outlined" fullWidth />
+                                    <TextInput source="firstName"  label="First Name" resource="project-requests"  margin="dense" variant="outlined" fullWidth validate={[required()]}/>
                                 </Box>
                                 <Box flex={1} ml="0.5em">
-                                    <TextInput source="lastName"  label="Last Name" resource="project-requests"  margin="dense" variant="outlined" fullWidth />
+                                    <TextInput source="lastName"  label="Last Name" resource="project-requests"  margin="dense" variant="outlined" fullWidth validate={[required()]}/>
                                 </Box>
                             </Box>
                             <Box display="flex">
                                 <Box flex={1} mr="0.5em">
-                                    <TextInput source="phone" resource="project-requests"  margin="dense" variant="outlined" fullWidth />
+                                    <TextInput source="phone" resource="project-requests"  margin="dense" variant="outlined" fullWidth validate={[required()]}/>
                                 </Box>
                                 <Box flex={1} ml="0.5em">
-                                    <TextInput source="netId"  label="Net Id" resource="project-requests"  margin="dense" variant="outlined" fullWidth />
+                                    <TextInput source="netId"  label="Net Id" resource="project-requests"  margin="dense" variant="outlined" fullWidth validate={[required()]}/>
                                 </Box>
                             </Box>
                             <Box mt="1em" />
@@ -370,13 +379,13 @@ const ProjectForm = props => (
                             <Box mt="1em" />
                             <Typography variant="h6" gutterBottom>Department Chair/Manager Information</Typography>
 
-                            <TextInput resource="project-requests" source="managerNetId" label="Manager Net Id" margin="dense" variant="outlined"  />
+                            <TextInput resource="project-requests" source="managerNetId" label="Manager Net Id" margin="dense" variant="outlined"  validate={[required()]}/>
                             <Box display="flex">
                                 <Box flex={1} mr="0.5em">
-                                    <TextInput source="managerFirstName" resource="project-requests" label="Manager First Name" margin="dense" variant="outlined" fullWidth />
+                                    <TextInput source="managerFirstName" resource="project-requests" label="Manager First Name" margin="dense" variant="outlined" fullWidth validate={[required()]}/>
                                 </Box>
                                 <Box flex={1} ml="0.5em">
-                                    <TextInput source="managerLastName" resource="project-requests" label="Manager Last Name" margin="dense" variant="outlined" fullWidth />
+                                    <TextInput source="managerLastName" resource="project-requests" label="Manager Last Name" margin="dense" variant="outlined" fullWidth validate={[required()]}/>
                                 </Box>
                             </Box>
 
@@ -385,14 +394,14 @@ const ProjectForm = props => (
                             <Box mt="1em" />
                             <Typography variant="h6" gutterBottom>Project Location</Typography>
                             <ReferenceInput label="Campus" source="projectLocationCampus" reference="sites">
-                                <SelectInput  optionText="name" optionValue="id" margin="dense" variant="outlined"  fullWidth/>
+                                <SelectInput  optionText="name" optionValue="id" margin="dense" variant="outlined"  fullWidth validate={[required()]}/>
                             </ReferenceInput>
 
                             <FormDataConsumer>
                             {({ formData, ...rest }) =>  formData.projectLocationCampus &&(
 
                             <ReferenceInput label="Building" source="projectLocationBuilding" reference="buildings" filter={{site: formData.projectLocationCampus}} {...rest}>
-                                <SelectInput  source="projectLocationBuilding" optionText="name" optionValue="id" margin="dense" variant="outlined"  fullWidth/>
+                                <SelectInput  source="projectLocationBuilding" optionText="name" optionValue="id" margin="dense" variant="outlined"  fullWidth validate={[required()]}/>
                             </ReferenceInput>
                             )}
                             </FormDataConsumer>
@@ -400,7 +409,7 @@ const ProjectForm = props => (
                             <FormDataConsumer>
                             {({ formData, ...rest }) =>  formData.projectLocationCampus && formData.projectLocationBuilding && (
                             <ReferenceInput label="Floor" source="projectLocationFloor" reference="floors" filter={{site: formData.projectLocationCampus , buildingCode: formData.projectLocationBuilding}} {...rest}>
-                                <SelectInput source="projectLocationFloor" optionText="name" optionValue="id" margin="dense" variant="outlined"  fullWidth/>
+                                <SelectInput source="projectLocationFloor" optionText={optionRenderer}  optionValue="id" margin="dense" variant="outlined"  fullWidth/>
                             </ReferenceInput>
                             )}
                             </FormDataConsumer>
@@ -408,7 +417,7 @@ const ProjectForm = props => (
                             <FormDataConsumer>
                             {({ formData, ...rest }) => formData.projectLocationCampus && formData.projectLocationBuilding && formData.projectLocationFloor && (
                             <ReferenceInput label="Room" source="projectLocationRoom" reference="rooms" filter={{site: formData.projectLocationCampus , buildingCode: formData.projectLocationBuilding, floorCode: formData.projectLocationFloor}} {...rest}>
-                                <SelectInput source="projectLocationRoom" optionText="id" optionValue="id" margin="dense" variant="outlined"  fullWidth/>
+                                <SelectInput source="projectLocationRoom" optionText={optionRenderer} optionValue="id" margin="dense" variant="outlined"  fullWidth/>
                             </ReferenceInput>
                             )}
                             </FormDataConsumer>
@@ -420,14 +429,14 @@ const ProjectForm = props => (
                             <Box mt="1em" />
                             <Typography variant="h6" gutterBottom>Project Details</Typography>
 
-                            <TextInput resource="project-requests" source="projectName" label="Project Name" margin="dense" variant="outlined"  fullWidth/>
+                            <TextInput resource="project-requests" source="projectName" label="Project Name" margin="dense" variant="outlined"  fullWidth validate={[required()]}/>
                             <TextInput resource="project-requests" multiline source="projectDetails" label="Project Details" margin="dense" variant="outlined"  fullWidth/>
                             <Box display="flex">
                                 <Box flex={1} mr="0.5em">
-                                    <TextInput source="estimatedBudget" resource="project-requests" label="Estimated Budget" margin="dense" variant="outlined" fullWidth />
+                                    <TextInput source="estimatedBudget" resource="project-requests" label="Estimated Budget" margin="dense" variant="outlined" fullWidth  format={formatBudget}/>
                                 </Box>
                                 <Box flex={1} ml="0.5em">
-                                    <DateInput source="dateRequiredBy" resource="project-requests" label="Date Required By" margin="dense" variant="outlined" fullWidth />
+                                    <DateInput source="dateRequiredBy" resource="project-requests" label="Date Required By" margin="dense" variant="outlined" fullWidth validate={[required()]}/>
                                 </Box>
                             </Box>
                             <Box display="flex">
