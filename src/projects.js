@@ -559,7 +559,7 @@ const ProjectForm = props => (
                                 <FileField source="src" title="title" />
                             </FileInput>
 
-                            {/* <TextInput source="attachment" resource="project-requests" label="Attachment" margin="dense" variant="outlined" fullWidth/> */}
+                            <TextInput source="attachment" resource="project-requests" label="Attached Files" margin="dense" variant="outlined" fullWidth disabled/>
 
                         </Box>
 
