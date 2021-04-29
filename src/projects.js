@@ -5,7 +5,7 @@ import { List, Datagrid, TextField, DateField, NumberField, EmailField, UrlField
     
     SaveButton,
     DeleteButton,
-    NullableBooleanInput, ReferenceInput,FormDataConsumer, required } from 'react-admin';
+    NullableBooleanInput, ReferenceInput,FormDataConsumer, required , FileInput, FileField } from 'react-admin';
 
 import { Typography, Box, Toolbar,Divider  } from '@material-ui/core';
 import numeral from 'numeral';
@@ -555,7 +555,12 @@ const ProjectForm = props => (
                             <Box mt="1em" />
                             <Typography variant="h6" gutterBottom>Attachments (You may select up to 5 files to upload. The max file size is 2MB)</Typography>
 
-                            <TextInput source="attachment" resource="project-requests" label="Attachment" margin="dense" variant="outlined" fullWidth/>
+                            <FileInput source="files" label="Attachment" multiple={true} maxSize={2000000} margin="dense" variant="outlined" fullWidth>
+                                <FileField source="src" title="title" />
+                            </FileInput>
+
+                            {/* <TextInput source="attachment" resource="project-requests" label="Attachment" margin="dense" variant="outlined" fullWidth/> */}
+
                         </Box>
 
                         {/* <Box flex={1} ml="1em">

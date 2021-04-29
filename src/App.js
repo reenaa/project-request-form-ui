@@ -11,6 +11,7 @@ import authProvider from './authProvider';
 import { createMuiTheme } from '@material-ui/core/styles';
 import orange from '@material-ui/core/colors/orange';
 import backgroundimg from './PrincetonAtNight.JPG'; 
+import myDataProvider from './myDataProvider.js'
 
 const theme = createMuiTheme({
     palette: {
@@ -38,10 +39,10 @@ const httpClient = (url, options = {}) => {
     return fetchUtils.fetchJson(url, options);
 };
 
-const dataProvider = jsonServerProvider('http://fac130l.princeton.edu:8080', httpClient);
+ const dataProvider = jsonServerProvider('http://fac130l.princeton.edu:8080', httpClient);
 // const dataProvider = jsonServerProvider('http://localhost:8080', httpClient);
 const App = () => (
-      <Admin theme={theme} authProvider={authProvider} dataProvider={dataProvider} loginPage={MyLoginPage}>
+      <Admin theme={theme} authProvider={authProvider} dataProvider={myDataProvider} loginPage={MyLoginPage}>
           {/* <Resource name="posts" list={ListGuesser} />
           <Resource name="users" list={UserList} edit={UserEdit} create={UserCreate}/> */}
           <Resource name="project-requests" list={ProjectRequestList} edit={ProjectFormEdit} create={ProjectFormCreate} />
