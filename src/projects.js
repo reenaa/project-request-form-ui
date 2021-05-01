@@ -37,6 +37,7 @@ export const ProjectRequestList = props => (
             <TextField source="lastName" />
             <TextField source="projectLocationBuilding" label="Location" />
             <TextField source="userName" label="Created By"/>
+            <TextField source="createTime" label="Create Time"/>
             {/* <TextField source="projectLocationCampus" />
             <TextField source="projectPriority" />
             <NumberField source="fiscalYearStart" />
@@ -560,7 +561,7 @@ const ProjectForm = props => (
                             </FileInput>
 
                             <TextInput source="attachment" resource="project-requests" label="Attached Files" margin="dense" variant="outlined" fullWidth disabled/>
-
+                            <TextInput source="createTime" label="Create Time" margin="dense" variant="outlined" fullWidth disabled/>
                         </Box>
 
                         {/* <Box flex={1} ml="1em">
