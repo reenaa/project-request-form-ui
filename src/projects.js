@@ -464,7 +464,16 @@ const ProjectForm = props => (
             ]} />
                                 </Box>
                             </Box>
+                            <Box mt="1em" />
+                            <Divider />
+                            <Box mt="1em" />
+                            <Typography variant="h6" gutterBottom>Attachments (You may select up to 5 files to upload. The max file size is 2MB)</Typography>
 
+                            <FileInput source="files" label="Attachment" multiple={true} maxSize={2000000} margin="dense" variant="outlined" fullWidth>
+                                <FileField source="src" title="title" />
+                            </FileInput>
+
+                            <TextInput source="attachment" resource="project-requests" label="Attached Files" margin="dense" variant="outlined" fullWidth disabled/>
                             <Box mt="1em" />
                             <Divider />
                             <Box mt="1em" />
@@ -551,16 +560,6 @@ const ProjectForm = props => (
                                 </Box>
                             </Box>
 
-                            <Box mt="1em" />
-                            <Divider />
-                            <Box mt="1em" />
-                            <Typography variant="h6" gutterBottom>Attachments (You may select up to 5 files to upload. The max file size is 2MB)</Typography>
-
-                            <FileInput source="files" label="Attachment" multiple={true} maxSize={2000000} margin="dense" variant="outlined" fullWidth>
-                                <FileField source="src" title="title" />
-                            </FileInput>
-
-                            <TextInput source="attachment" resource="project-requests" label="Attached Files" margin="dense" variant="outlined" fullWidth disabled/>
                             <TextInput source="createTime" label="Create Time" margin="dense" variant="outlined" fullWidth disabled/>
                         </Box>
 
