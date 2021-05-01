@@ -13,7 +13,7 @@ import numeral from 'numeral';
 const formatBudget = value =>
   value === undefined
     ? '' // make controlled
-    : numeral(value).format('$0,0')
+    : numeral(value).format('$0')
 
 const optionRenderer = choice => `${choice.id} ${choice.name}`;    
 
