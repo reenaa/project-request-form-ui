@@ -80,7 +80,7 @@ export const ProjectRequestEdit = props => (
             {/* <TextInput source="sourceOfFunding" /> */}
             <SelectInput source="sourceOfFunding" choices={[
                 { id: 'Departmental', name: 'Departmental' },
-                { id: 'Central Funding (Capital Request)', name: 'Central Funding Capital Request)' },
+                { id: 'Central Funding', name: 'Central Funding' },
                 { id: 'Major Maintenance', name: 'Major Maintenance' },
                 { id: 'Operating', name: 'Operating' },
             ]} />
@@ -188,7 +188,7 @@ export const ProjectRequestCreate = props => (
             {/* <TextInput source="sourceOfFunding" /> */}
             <SelectInput source="sourceOfFunding" choices={[
                 { id: 'Departmental', name: 'Departmental' },
-                { id: 'Central Funding (Capital Request)', name: 'Central Funding Capital Request)' },
+                { id: 'Central Funding', name: 'Central Funding' },
                 { id: 'Major Maintenance', name: 'Major Maintenance' },
                 { id: 'Operating', name: 'Operating' },
             ]} />
@@ -445,7 +445,7 @@ const ProjectForm = props => (
                                     {/* <TextInput source="managerFirstName" resource="project-requests" label="Manager First Name" margin="dense" variant="outlined" fullWidth /> */}
 
                                     <SelectInput source="sourceOfFunding" resource="project-requests" label="Source Of Funding" margin="dense" variant="outlined" fullWidth choices={[
-                { id: 'Central Funding (Capital Request)', name: 'Central Funding (Capital Request)' },
+                { id: 'Central Funding', name: 'Central Funding' },
                 { id: 'Departmental', name: 'Departmental' },
                 { id: 'Major Maintenance', name: 'Major Maintenance' },
                 { id: 'Operating', name: 'Operating' },
