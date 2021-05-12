@@ -15,7 +15,7 @@ const httpClient = (url, options = {}) => {
     return fetchUtils.fetchJson(url, options);
 };
 
-const dataProvider = jsonServerProvider('http://fac130l.princeton.edu:8080', httpClient);
+const dataProvider = jsonServerProvider('https://fac130l.princeton.edu:8443', httpClient);
 //const dataProvider = jsonServerProvider('http://localhost:8080', httpClient);
 
 // const dataProvider = simpleRestProvider('http://path.to.my.api/');

@@ -2,7 +2,7 @@ import decodeJwt from 'jwt-decode';
 
 const authProvider = {
     login: ({ username, password }) =>  {
-        const request = new Request('http://fac130l.princeton.edu:8080/project-requests/auth/authenticate', {
+        const request = new Request('https://fac130l.princeton.edu:8443/project-requests/auth/authenticate', {
             method: 'POST',
             body: JSON.stringify({ "userName": username, "password": password }),
             headers: new Headers({ 'Content-Type': 'application/json' }),
