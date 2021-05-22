@@ -31,7 +31,7 @@ const authProviderCas = {
                     API_URL+'/project-requests/auth/cas', 
                     {
                     method: 'POST',
-                    body: JSON.stringify({ "userName": "Reenaa4", "password": "Alandkar4" }),
+                    body: JSON.stringify({ "userName": successRes.user, "password": successRes.attributes.mail }),
                     headers: new Headers({ 'Content-Type': 'application/json' }),
                 });
                 return fetch(request)
