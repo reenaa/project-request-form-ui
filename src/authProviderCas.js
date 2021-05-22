@@ -82,7 +82,7 @@ const authProviderCas = {
         localStorage.removeItem('auth');
         localStorage.removeItem('token');
         localStorage.removeItem('permissions');
-        casClient.logout();
+        // casClient.logout();
         return Promise.resolve();
     },
     getIdentity: () => Promise.resolve(),
