@@ -14,6 +14,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
+To Run with Password auth
+`HTTPS=true SSL_CRT_FILE=cert.pem SSL_KEY_FILE=key.pem  REACT_APP_LOGIN=PASSWORD REACT_APP_ENV=local npm start`
+To Run with CAS auth
+`HTTPS=true SSL_CRT_FILE=cert.pem SSL_KEY_FILE=key.pem  REACT_APP_LOGIN=CAS REACT_APP_ENV=stage npm start`
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
