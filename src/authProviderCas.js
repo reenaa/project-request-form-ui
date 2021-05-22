@@ -12,9 +12,9 @@ var API_URL;
  }
 
 let casEndpoint = REACT_APP_CAS_URL;
-let casOptions = { version: constant.CAS_VERSION_2_0 };
+// let casOptions = { version: constant.CAS_VERSION_2_0 };
  
-let casClient = new CasClient(casEndpoint, casOptions);
+let casClient = new CasClient(casEndpoint);
 
 const authProviderCas = {
     login: async () =>  {
