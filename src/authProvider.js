@@ -1,8 +1,20 @@
 import decodeJwt from 'jwt-decode';
+const { REACT_APP_LOGIN, REACT_APP_DEV_API_URL,REACT_APP_STAGE_API_URL,REACT_APP_PROD_API_URL, REACT_APP_ENV } = process.env;
+
+var API_URL;
+ if( REACT_APP_ENV === 'production') {
+    API_URL = REACT_APP_PROD_API_URL;
+ }else if(REACT_APP_ENV === 'stage'){
+    API_URL = REACT_APP_STAGE_API_URL;
+ }else{
+    API_URL = REACT_APP_DEV_API_URL;
+ }
 
 const authProvider = {
     login: ({ username, password }) =>  {
-        const request = new Request('https://fac130l.princeton.edu:8443/project-requests/auth/authenticate', {
+        const request = new Request(
+            API_URL+'/project-requests/auth/authenticate', 
+            {
             method: 'POST',
             body: JSON.stringify({ "userName": username, "password": password }),
             headers: new Headers({ 'Content-Type': 'application/json' }),

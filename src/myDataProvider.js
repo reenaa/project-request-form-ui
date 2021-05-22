@@ -1,7 +1,16 @@
 // import simpleRestProvider from 'ra-data-simple-rest';
 import jsonServerProvider from 'ra-data-json-server';
 import { fetchUtils} from 'react-admin';
+const { REACT_APP_LOGIN, REACT_APP_DEV_API_URL,REACT_APP_STAGE_API_URL,REACT_APP_PROD_API_URL, REACT_APP_ENV } = process.env;
 
+var API_URL;
+ if( REACT_APP_ENV === 'production') {
+    API_URL = REACT_APP_PROD_API_URL;
+ }else if(REACT_APP_ENV === 'stage'){
+    API_URL = REACT_APP_STAGE_API_URL;
+ }else{
+    API_URL = REACT_APP_DEV_API_URL;
+ }
 
 const httpClient = (url, options = {}) => {
     if (!options.headers) {
@@ -15,8 +24,7 @@ const httpClient = (url, options = {}) => {
     return fetchUtils.fetchJson(url, options);
 };
 
-const dataProvider = jsonServerProvider('https://fac130l.princeton.edu:8443', httpClient);
-//const dataProvider = jsonServerProvider('http://localhost:8080', httpClient);
+const dataProvider = jsonServerProvider(API_URL, httpClient);
 
 // const dataProvider = simpleRestProvider('http://path.to.my.api/');
 
