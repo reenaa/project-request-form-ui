@@ -1,6 +1,6 @@
 import decodeJwt from 'jwt-decode';
 import CasClient, { constant } from "react-cas-client";
-const { REACT_APP_LOGIN, REACT_APP_DEV_API_URL,REACT_APP_STAGE_API_URL,REACT_APP_PROD_API_URL, REACT_APP_ENV , REACT_APP_CAS_URL} = process.env;
+const { REACT_APP_DEV_API_URL,REACT_APP_STAGE_API_URL,REACT_APP_PROD_API_URL, REACT_APP_ENV , REACT_APP_CAS_URL, REACT_APP_URL_DEV,REACT_APP_URL_STAGE, REACT_APP_URL_PROD} = process.env;
 
 var API_URL;
  if( REACT_APP_ENV === 'production') {
@@ -11,13 +11,22 @@ var API_URL;
     API_URL = REACT_APP_DEV_API_URL;
  }
 
+ let APP_URL;
+ if( REACT_APP_ENV === 'production') {
+    APP_URL = REACT_APP_URL_PROD;
+ }else if(REACT_APP_ENV === 'stage'){
+    APP_URL = REACT_APP_URL_STAGE;
+ }else{
+    APP_URL = REACT_APP_URL_DEV;
+ }
+
 let casEndpoint = REACT_APP_CAS_URL;
-// let casOptions = { version: constant.CAS_VERSION_2_0 };
+let casOptions = { version: constant.CAS_VERSION_3_0, redirectUrl: APP_URL};
  
-let casClient = new CasClient(casEndpoint);
+let casClient = new CasClient(casEndpoint, casOptions);
 
 const authProviderCas = {
-    login: async () =>  {
+    login: () =>  {
             casClient
             .auth()
             .then(successRes => {
@@ -77,7 +86,7 @@ const authProviderCas = {
     },
     checkAuth: () => localStorage.getItem('auth')
         ? Promise.resolve()
-        : Promise.reject({ message: 'login.required' }),
+        : Promise.reject(),
     logout: () => {
         localStorage.removeItem('auth');
         localStorage.removeItem('token');
