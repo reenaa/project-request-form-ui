@@ -14,6 +14,8 @@ import orange from '@material-ui/core/colors/orange';
 import backgroundimg from './PrincetonAtNight.JPG'; 
 import myDataProvider from './myDataProvider.js'
 import LoginForm from './LoginForm';
+import authProviderCas2 from './authProviderCas2';
+
 
 const { REACT_APP_LOGIN, REACT_APP_DEV_API_URL,REACT_APP_STAGE_API_URL,REACT_APP_PROD_API_URL, REACT_APP_ENV } = process.env;
 
@@ -69,7 +71,7 @@ const httpClient = (url, options = {}) => {
 //  const dataProvider = jsonServerProvider('http://fac130l.princeton.edu:8080', httpClient);
 const dataProvider = jsonServerProvider(API_URL, httpClient);
 const App = () =>{
-    var authProv = REACT_APP_LOGIN==="CAS"? authProviderCas: authProvider;
+    var authProv = REACT_APP_LOGIN==="CAS"? authProviderCas2: authProvider;
     return (
         <Admin theme={theme} authProvider={authProv} dataProvider={myDataProvider} loginPage={MyLoginPage}>
             {/* <Resource name="posts" list={ListGuesser} />

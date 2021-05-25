@@ -22,7 +22,8 @@ var API_URL;
 
 let casEndpoint = REACT_APP_CAS_URL;
 let casOptions = { version: constant.CAS_VERSION_3_0, redirectUrl: APP_URL, validation_proxy_path: '/cas_proxy'};
- 
+
+//let casOptions = { version: constant.CAS_VERSION_3_0, redirectUrl: APP_URL}; 
 let casClient = new CasClient(casEndpoint, casOptions);
 
 const authProviderCas = {
