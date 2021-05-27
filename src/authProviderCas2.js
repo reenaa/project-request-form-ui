@@ -37,10 +37,20 @@ const cleanup = () => {
 
 const caslogin = async () => {
 //        localStorage.setItem('inprocess', true);
-        const resp = await casClient.auth();
+      let resp;
+       try{ 
+          resp = await casClient.auth();
+       } catch(e) {
+         console.log(e);
+          cleanup();
+//           window.location.reload();
+            return;
+
+        }
         console.log(resp);
         if (!('user' in resp)) {
             cleanup();
+           window.location.reload();
             return;
 //            return Promise.reject();
         }
@@ -58,6 +68,7 @@ const caslogin = async () => {
 
         if (response.status < 200 || response.status >= 300) {
             cleanup();
+            window.location.reload();
             return;
         //    return Promise.reject();
         }
