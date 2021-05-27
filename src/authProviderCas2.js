@@ -35,10 +35,49 @@ const cleanup = () => {
     );
 }
 
+const caslogin = async () => {
+//        localStorage.setItem('inprocess', true);
+        const resp = await casClient.auth();
+        console.log(resp);
+        if (!('user' in resp)) {
+            cleanup();
+            return;
+//            return Promise.reject();
+        }
+
+        const request = new Request(
+                    API_URL+'/project-requests/auth/cas',
+                    {
+                    method: 'POST',
+                    body: JSON.stringify({ "userName": resp.user, "password": resp.user }),
+                    headers: new Headers({ 'Content-Type': 'application/json' }),
+                });
+        const response = await fetch(request);
+
+        console.log(response);
+
+        if (response.status < 200 || response.status >= 300) {
+            cleanup();
+            return;
+        //    return Promise.reject();
+        }
+
+
+        const auth = await response.json();
+        var authreponse = JSON.stringify(auth);
+        localStorage.setItem('auth', authreponse);
+        const { jwtToken } = JSON.parse(authreponse);
+        const decodedToken = decodeJwt(jwtToken);
+        localStorage.setItem('token', jwtToken);
+        localStorage.setItem('permissions', decodedToken.roles[0]['authority']);
+        cleanup();
+        window.location.reload();
+      // return Promise.resolve();
+    }
 
 const authProviderCas2 = {
     login: async () => {
-        localStorage.setItem('inprocess', true);   
+        localStorage.setItem('inprocess', true);  
         const resp = await casClient.auth();
         console.log(resp);
         if (!('user' in resp)) {
@@ -71,6 +110,7 @@ const authProviderCas2 = {
         localStorage.setItem('token', jwtToken);
         localStorage.setItem('permissions', decodedToken.roles[0]['authority']);
         cleanup();
+
        return Promise.resolve();
     } ,
     checkError: (error) => {
@@ -85,12 +125,22 @@ const authProviderCas2 = {
         // other error code (404, 500, etc): no need to log out
         return Promise.resolve();
     },
-    checkAuth: () =>{
-
+    checkAuth:  () =>{
         if(localStorage.getItem('auth')){
-            return Promise.resolve();
+            return Promise.resolve()
         }else{
-          return Promise.reject();  
+            if(localStorage.getItem('inprocess')){
+
+                let res =  caslogin();
+
+                if(localStorage.getItem('auth')){
+                       return Promise.resolve()
+                 }else{
+                      return Promise.reject("Please wait ...");
+                 }
+
+            }else{
+          return Promise.reject();}  
         }
      //   localStorage.getItem('auth')
       //  ? Promise.resolve()
