@@ -47,6 +47,8 @@ const myDataProvider = {
         // const formerPictures = params.data.pictures.filter(
         //     p => !(p.rawFile instanceof File)
         // );
+        const filenames = newPictures.map(file=>  file.title);
+        console.log(filenames);
 
         return Promise.all(newPictures.map(convertFileToBase64))
             // .then(base64Pictures =>
@@ -62,6 +64,10 @@ const myDataProvider = {
                         ...params.data,
                         files: [
                             ...transformedNewPictures,
+                            
+                        ],
+                        filenames: [
+                            ...filenames,
                             
                         ],
                     },
