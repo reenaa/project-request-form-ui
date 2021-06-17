@@ -30,6 +30,9 @@ const LoginForm = ({ classes, userLogin }) => {
             setLoading(true);
             userLogin({ code, state });
         }
+       if(localStorage.getItem('inprocess')){
+        setLoading(true);
+       }
     }, [userLogin]);
 
     const handleLogin = () => {

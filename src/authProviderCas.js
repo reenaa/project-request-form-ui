@@ -22,7 +22,8 @@ var API_URL;
 
 let casEndpoint = REACT_APP_CAS_URL;
 let casOptions = { version: constant.CAS_VERSION_3_0, redirectUrl: APP_URL, validation_proxy_path: '/cas_proxy'};
- 
+
+//let casOptions = { version: constant.CAS_VERSION_3_0, redirectUrl: APP_URL}; 
 let casClient = new CasClient(casEndpoint, casOptions);
 
 const authProviderCas = {
@@ -40,7 +41,7 @@ const authProviderCas = {
                     API_URL+'/project-requests/auth/cas', 
                     {
                     method: 'POST',
-                    body: JSON.stringify({ "userName": successRes.user, "password": successRes.attributes.mail }),
+                    body: JSON.stringify({ "userName": successRes.user, "password": successRes.user }),
                     headers: new Headers({ 'Content-Type': 'application/json' }),
                 });
                 return fetch(request)
@@ -57,6 +58,7 @@ const authProviderCas = {
                         const decodedToken = decodeJwt(jwtToken);
                         localStorage.setItem('token', jwtToken);
                         localStorage.setItem('permissions', decodedToken.roles[0]['authority']);
+                       return Promise.resolve();
                     })
                     .catch(() => {
                         return Promise.reject();
